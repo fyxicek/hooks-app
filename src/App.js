@@ -6,20 +6,22 @@ const App = () => {
   const url = "http://api.open-notify.org/iss-now.json"
   
 
-  useEffect(() => {
-    getNofity()
+  useEffect (() => {
+    getNotify()
   },[])
 
   console.log();
-
-  const getNotify = async => {
+  const getNotify = async() => {
     const response = await fetch(url)
     const data = await response.json()
-    const finalNotify = data["timestamp"]
+    const finalNotify = data["timestamp", "iss_position"]
     setNotify(finalNotify)
   }
   return(
-    <h1>{notify}</h1>
+    <div>
+      <h1>{notify}</h1>
+    </div>
+    
   )
   
 }
