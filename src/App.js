@@ -1,25 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import {useState, useEffect} from "react"
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+const App = () => { 
+  const [windowSize, setWindowSize] = useState(window.innerWidth)
+  const [windowHeight, setWindowHeight] = useState(window.innerHeight)
+
+  const sizeControl = () =>{
+    setWindowSize(window.innerWidth)
+  }
+  useEffect ( () => {
+    window.addEventListener("resize", sizeControl)
+  })
+
+  const heightControl = () =>{
+    setWindowHeight(window.innerHeight)
+  }
+
+  useEffect (() => {
+    console.log("ja jsem useEffect")
+    window.addEventListener("resize", heightControl)
+    return () => {
+      console.log("ja jsem cleanUp function")
+      window.removeEventListener("resize", sizeControl)
+    }
+  })
+  
+  return(
+    <div>
+      <h1>šířka okna</h1>
+      <h2>{windowSize}</h2>
+      <h3>{windowHeight}</h3>
     </div>
-  );
-}
+  )
+ }
 
-export default App;
+ export default App
