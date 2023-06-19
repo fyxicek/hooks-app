@@ -1,37 +1,29 @@
 import {useState, useEffect} from "react"
 
 
-const App = () => { 
-  const [windowSize, setWindowSize] = useState(window.innerWidth)
-  const [windowHeight, setWindowHeight] = useState(window.innerHeight)
-
-  const sizeControl = () =>{
-    setWindowSize(window.innerWidth)
-  }
-  useEffect ( () => {
-    window.addEventListener("resize", sizeControl)
-  })
-
-  const heightControl = () =>{
-    setWindowHeight(window.innerHeight)
-  }
-
-  useEffect (() => {
-    console.log("ja jsem useEffect")
-    window.addEventListener("resize", heightControl)
-    return () => {
-      console.log("ja jsem cleanUp function")
-      window.removeEventListener("resize", sizeControl)
-    }
-  })
+const App = () => {
+  const [quote, setQuote] = useState("")
+  const url = "https://api.kanye.rest/"
   
+  useEffect (() => {
+    getQuote()
+  },[])
+
+  console.log();
+  const getQuote = async() => {
+    const response = await fetch(url)
+    const data = await response.json()
+    const finalQuote = data["quote"]
+    setQuote(finalQuote)
+  }
+
+    
   return(
     <div>
-      <h1>šířka okna</h1>
-      <h2>{windowSize}</h2>
-      <h3>{windowHeight}</h3>
+      <h1>{quote}</h1>
     </div>
+    
   )
- }
+}
 
- export default App
+export default App
