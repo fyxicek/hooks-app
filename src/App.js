@@ -1,29 +1,26 @@
-import {useState, useEffect} from "react"
+import {useEffect, useState} from "react"
 
 
 const App = () => {
-  const [quote, setQuote] = useState("")
-  const url = "https://api.kanye.rest/"
+  const [notify, setNotify] = useState("")
+  const url = "http://api.open-notify.org/iss-now.json"
   
-  useEffect (() => {
-    getQuote()
+
+  useEffect(() => {
+    getNofity()
   },[])
 
   console.log();
-  const getQuote = async() => {
+
+  const getNotify = async => {
     const response = await fetch(url)
     const data = await response.json()
-    const finalQuote = data["quote"]
-    setQuote(finalQuote)
+    const finalNotify = data["timestamp"]
+    setNotify(finalNotify)
   }
-
-    
   return(
-    <div>
-      <h1>{quote}</h1>
-    </div>
-    
+    <h1>{notify}</h1>
   )
+  
 }
-
 export default App
