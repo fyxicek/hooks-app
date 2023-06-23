@@ -7,7 +7,8 @@ const App = () => {
   const [latitude, setLatitude] = useState("")
   const [longitude, setLongitude] = useState("")
   const [timestamp, setTimestamp] = useState("")
-  
+  const timestamp1 = 160395839
+
   useEffect(() => {
     //get url and save it 
     fetch(url)
@@ -18,6 +19,7 @@ const App = () => {
       setLongitude(position["longitude"])
       setTimestamp(position["timestamp"])
     }))
+
   }, [])
 
   useEffect(() => {
@@ -34,10 +36,12 @@ const App = () => {
     <h1>Poloha vesmírné lodi</h1>
     <h2>Zeměpisná šířka</h2>
     <p>{latitude}</p>
-    <h3>Zeměpisná délka</h3>
+    <h2>Zeměpisná délka</h2>
     <p>{longitude}</p>
-    <h4>Timestamp</h4>
+    <h3>Timestamp</h3>
     <p>{timestamp}</p>
+   
+
     <a href="https://mapy.cz/zakladni?x=${latitude}&y=${longitude}&z=5" target="_blank">Odkaz na mapu</a>
     </div>
 
